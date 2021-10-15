@@ -17,6 +17,17 @@ const initApp = () => {
     ['dragleave', 'drop'].forEach(eventName => {
         droparea.addEventListener(eventName, inactive);
     });
+
+    droparea.addEventListener("drop", handleDrop);
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
+
+
+const handleDrop = (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    const fileArray = [...files];
+    console.log(files);
+    console.log(fileArray);
+}
