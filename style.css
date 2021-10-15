@@ -8,7 +8,7 @@ html {
 }
 
 .bi-file-earmark-arrow-up {
-    font-size: larger;
+    font-size: 10rem;
     color: green;
 }
 
@@ -19,4 +19,14 @@ html {
     padding: 1em;
     background-color: #eeffbe;
     width: 100%;
+}
+
+.drop-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.green-border {
+    border: green;
 }
