@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
 html {
+    margin: 0;
+    padding: 0;
     height: 400px;
     width: 300px;
     background-color: #f8ffe2;
     font-family: 'Roboto', sans-serif !important;
+}
+body {
+    margin: 0;
+    padding: 0;
 }
 
 .bi-file-earmark-arrow-up {
@@ -25,8 +31,15 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: dashed 4px gray;
+    margin: 1em;
 }
 
 .green-border {
-    border: green;
+    border: dashed 4px green;
+    background-color: #eeffbe;
+}
+
+h3 {
+    text-align: center;
 }
