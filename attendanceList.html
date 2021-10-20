@@ -5,8 +5,10 @@
     <script defer src="webpage.js"></script>
 </head>
 <body>
-<p>Test button</p>
-<button onclick="myFunction()">Don't Click This</button>
-
+<form id="displayForm">
+    <input type="file" id="csvFile" accept=".csv" />
+    <br />
+    <input type="submit" value="Submit" onclick="displayFile()"/>
+</form>
 </body>
 </html>
