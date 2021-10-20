@@ -4,10 +4,10 @@
  * @version 0.01
  */
 class StudentConnection {
-    constructor(name, email, time) {
-        this.name = name;
-        this.email = email;
-        this.time = time;
+    constructor() {
+        this.name = "";
+        this.email = "";
+        this.timeMinutes = 0;
     }
 
     /**
@@ -16,12 +16,19 @@ class StudentConnection {
      * @param email Email of the student (string)
      */
     checkMatch(name, email) {
-        if (this.email.toLowerCase() === email.toLowerCase()){ //email check
+        if (this.email.toLowerCase() === email.toLowerCase() && email.toLowerCase() !== ""){ //email check
             return true;
         } else if (this.name.toLowerCase() === name.toLowerCase()) { //name check
+            if (this.email.toLowerCase() === "" && email.toLowerCase() !== "") { //add email if student rejoins
+                this.email = email;
+            }
             return true;
         }
         return false;
+    }
+
+    addTime(timeMinutes) {
+        this.timeMinutes += parseFloat(timeMinutes);
     }
 
 }
