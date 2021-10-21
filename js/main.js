@@ -40,6 +40,7 @@ const handleDrop = async (e) => {
  */
 function generateAttendanceSheet(students) {
     let html = "<head><title>Student Attendance</title><style> .studentTable { outline: solid black 2px; background-color: #eeffbe; padding: 1em;} .colorFlip { background-color: #f8ffe2; } </style></head>";
+    html += "<h3> For the meeting/class hosted on " + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + "</h3>";
     html += "<table><tr><th class='studentTable'>Student Name</th><th class='studentTable'>Student Email</th><th class='studentTable'>Minutes Joined</th></tr>";
     let colorFlip = false;
     for (let s of students) { //loop through students array

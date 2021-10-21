@@ -57,6 +57,7 @@ function parseFile(fileData) {
                     students[students.length - 1].addTime(parseFloat(curLine[4]));
                     if (curLine[5] === "No") {
                         students[students.length - 1].host = true;
+                        recordDate = curLine[2];
                     }
                 }
 
