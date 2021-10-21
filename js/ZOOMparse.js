@@ -8,17 +8,20 @@
 * 5 -> Was a guest (No = meeting host/instructor, Yes = guest/student
 * 6 -> Recording consent (Y = Yes/true, (blank) = No/false)
 * */
+let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest", "Recording Consent\r"];
 
 function parseFile(fileData) {
     let students = []; //this is the finished variable that contains StudentConnections.
 
     //create column definitions via a key/value pair
     let buffer = ""; //stores current value of string
-    let colDef = {}; //contains definitions of what each column is
+    let colDef = []; //contains definitions of what each column is
     let colCount = 0; //number of columns counted in this csv
     let curCol = 0;
     let defineCol = true;
     let curLine = [];
+
+
     //Loop through each character in the csv
     for (let i = 0; i < fileData.length; i++) {
         let char = fileData.charAt(i);
@@ -40,6 +43,17 @@ function parseFile(fileData) {
                 colCount++;
                 buffer = "";
                 defineCol = false;
+                console.log(colDef.length);
+                for (let i = 0; i < colDef.length; i++) { //loop through all the defined columns to check if the CSV format is proper
+                    console.log(colDef[i] + " " + properCSVFormat[i]);
+                    if (colDef[i] !== properCSVFormat[i]) {
+                        //display an incorrect format error
+                        document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
+                        return;
+                    }
+                }
+                //reset the error prompt
+                document.getElementById("bottom").innerHTML = ``;
             } else {
                 //Add or update student
                 let alreadyAdded = false;

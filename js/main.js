@@ -27,9 +27,10 @@ const handleDrop = async (e) => {
     const files = dt.files;
     const fileArray = [...files];
 
-    console.log(fileArray[0].type)
-
-    if (fileArray[0].type !== "application/vnd.ms-excel") return;
+    if (fileArray[0].type !== "application/vnd.ms-excel") {
+        document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
+        return;
+    }
     const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
     parseFile(fileData); //turn into students
 }

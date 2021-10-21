@@ -3,7 +3,7 @@
  * @author Hunter A.
  * @version 0.01
  */
-let recordDate;
+let recordDate = "w";
 class StudentConnection {
     constructor() {
         this.name = "";
