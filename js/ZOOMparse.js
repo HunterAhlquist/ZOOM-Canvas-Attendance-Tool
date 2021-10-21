@@ -58,30 +58,30 @@ function parseFile(fileData) {
                 //Add or update student
                 let alreadyAdded = false;
                 for (let s of students) { //loop through students already added, to see if they can be merged
-                    alreadyAdded = s.checkMatch(curLine[0], curLine[1])
+                    alreadyAdded = s.checkMatch(curLine[0], curLine[1]); //check if a student was already entered
                     if (alreadyAdded){
-                        s.addTime(parseFloat(curLine[4]));
+                        s.addTime(parseFloat(curLine[4])); //Merge times
                         break;
                     }
                 }
                 if (!alreadyAdded) {
-                    students[students.length] = new StudentConnection();
-                    students[students.length - 1].name = curLine[0];
-                    students[students.length - 1].email = curLine[1];
-                    students[students.length - 1].addTime(parseFloat(curLine[4]));
-                    if (curLine[5] === "No") {
+                    students[students.length] = new StudentConnection(); //create new student object
+                    students[students.length - 1].name = curLine[0]; //add the name
+                    students[students.length - 1].email = curLine[1]; //add the email
+                    students[students.length - 1].addTime(parseFloat(curLine[4])); //add their time
+                    if (curLine[5] === "No") { //host check
                         students[students.length - 1].host = true;
-                        recordDate = curLine[2];
+                        recordDate = curLine[2]; //get meeting time
                     }
                 }
 
-                buffer = "";
-                curLine = [];
+                buffer = ""; //reset buffer
+                curLine = []; //clear current line
                 curCol = 0;
             }
             continue;
         }
-        buffer += char;
+        buffer += char; //add character to buffer
     }
-    generateAttendanceSheet(students);
+    generateAttendanceSheet(students); //display attendance window with data
 }
