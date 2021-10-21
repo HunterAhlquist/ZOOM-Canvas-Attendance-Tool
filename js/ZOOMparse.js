@@ -12,8 +12,6 @@
 function parseFile(fileData) {
     let students = []; //this is the finished variable that contains StudentConnections.
 
-    let lines = fileData.split('\n');
-    console.log(lines.pop());
     //create column definitions via a key/value pair
     let buffer = ""; //stores current value of string
     let colDef = {}; //contains definitions of what each column is
@@ -70,6 +68,5 @@ function parseFile(fileData) {
         }
         buffer += char;
     }
-
     generateAttendanceSheet(students);
 }

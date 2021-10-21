@@ -27,6 +27,9 @@ const handleDrop = async (e) => {
     const files = dt.files;
     const fileArray = [...files];
 
+    console.log(fileArray[0].type)
+
+    if (fileArray[0].type !== "application/vnd.ms-excel") return;
     const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
     parseFile(fileData); //turn into students
 }
