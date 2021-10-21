@@ -8,6 +8,7 @@ class StudentConnection {
         this.name = "";
         this.email = "";
         this.timeMinutes = 0;
+        this.host = false;
     }
 
     /**
@@ -32,3 +33,4 @@ class StudentConnection {
     }
 
 }
+
