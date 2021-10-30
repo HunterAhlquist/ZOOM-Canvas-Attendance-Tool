@@ -78,19 +78,17 @@ h3 {
 .button-wrap {
     position: relative;
 }
-
+/* Don't remove below. It hides the choose file button behind the upload button */
 input[type="file"] {
     position: absolute;
     z-index: -1;
-    top: 5px;
-    left: 20px;
-    font-size: 17px;
-    color: #b8b8b8;
+    top: 0.3125rem;
+    left: 1.25rem;
 }
-
 body div h2{
     text-align: center;
 }
+
 /*
 main.html styling end
  */
