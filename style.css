@@ -1,21 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
+/*
+main.html styling start
+ */
 html {
     margin: 0;
     padding: 0;
-    height: 400px;
-    width: 300px;
-    background-color: #f8ffe2;
+    height: 25rem;
+    width: 18.75rem;
+    background-color: #ececec;
     font-family: 'Roboto', sans-serif !important;
 }
 body {
+    flex-direction: column;
+    order: 4;
     margin: 0;
     padding: 0;
 }
 
 .bi-file-earmark-arrow-up {
-    font-size: 10rem;
-    color: green;
+    font-size: 5.625rem;
+    color: #385170;
 }
 
 .bottom {
@@ -32,6 +37,10 @@ body {
     align-items: center;
     border: dashed 4px gray;
     margin: 1em;
+    width: 16.875rem;
+    height: 12.500rem;
+    flex-direction: column;
+    order: 2;
 }
 
 .green-border {
@@ -42,3 +51,46 @@ body {
 h3 {
     text-align: center;
 }
+.upload_bottom{
+    display: inline-block;
+    color: #fff;
+    background: #385170;
+    border: none;
+    width: 16.875rem;
+    height: 2.1875rem;
+    margin: 0 1rem 1rem 1rem;
+    border-radius: .25rem;
+    border-bottom: .25rem solid #142d4c;
+    transition: all .2s ease;
+    outline: none;
+    text-align: center;
+    font-size: 1.25rem;
+}
+.upload_bottom:hover{
+    background: green;
+    border-bottom:.25rem solid green;
+    color: #eeffbe;
+}
+.upload_bottom:active{
+    border:0;
+}
+
+.button-wrap {
+    position: relative;
+}
+
+input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    top: 5px;
+    left: 20px;
+    font-size: 17px;
+    color: #b8b8b8;
+}
+
+body div h2{
+    text-align: center;
+}
+/*
+main.html styling end
+ */
