@@ -11,6 +11,7 @@ html {
     background-color: #ececec;
     font-family: 'Roboto', sans-serif !important;
 }
+
 body {
     flex-direction: column;
     order: 4;
@@ -27,7 +28,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #eeffbe;
+    background-color: #142d4c;
     width: 100%;
 }
 
@@ -51,7 +52,8 @@ body {
 h3 {
     text-align: center;
 }
-.upload_bottom{
+
+.upload_bottom {
     display: inline-block;
     color: #fff;
     background: #385170;
@@ -66,18 +68,21 @@ h3 {
     text-align: center;
     font-size: 1.25rem;
 }
-.upload_bottom:hover{
+
+.upload_bottom:hover {
     background: green;
-    border-bottom:.25rem solid green;
+    border-bottom: .25rem solid green;
     color: #eeffbe;
 }
-.upload_bottom:active{
-    border:0;
+
+.upload_bottom:active {
+    border: 0;
 }
 
 .button-wrap {
     position: relative;
 }
+
 /* Don't remove below. It hides the choose file button behind the upload button */
 input[type="file"] {
     position: absolute;
@@ -85,7 +90,8 @@ input[type="file"] {
     top: 0.3125rem;
     left: 1.25rem;
 }
-body div h2{
+
+body div h2 {
     text-align: center;
 }
 

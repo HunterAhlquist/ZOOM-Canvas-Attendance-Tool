@@ -40,22 +40,37 @@ const handleDrop = async (e) => {
  * @param students StudentConnections object array
  */
 function generateAttendanceSheet(students) {
-    let html = "<head><title>Student Attendance</title><style> .studentTable { outline: solid black 2px; background-color: #eeffbe; padding: 1em;} .colorFlip { background-color: #f8ffe2; } </style></head>";
-    html += "<h3> For the meeting/class hosted on " + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + "</h3>";
-    html += "<table><tr><th class='studentTable'>Student Name</th><th class='studentTable'>Student Email</th><th class='studentTable'>Minutes Joined</th></tr>";
-    let colorFlip = false;
+    let html = "<head>" +
+                    "<title>Student Attendance</title>" +
+                    "<style> " +
+                        "body {font-family: 'Arial', sans-serif;}" +
+                        "center{display: flex; align-items: center; align-content: center;}" +
+                        "ul {padding: 0.625rem 1.875rem 0 1.875rem}" +
+                        "li { border-radius: 0.1875rem; padding: 1.5625rem 1.875rem; display: flex; justify-content: space-between; margin-bottom: 1.5625rem; }" +
+                        ".table_header { background-color: #5179b4; font-size: 1.125rem; text-transform: uppercase; }" +
+                        ".table_row { background-color: #ececec; box-shadow: 0 0 0.4375rem 0 dimgrey; }" +
+                        ".column_1 {flex-basis: 30%; }" +
+                        ".column_2 {flex-basis: 60%; }" +
+                        ".column_3 {flex-basis: 10%; }" +
+                    "</style>" +
+                "</head>";
+    html += "<h2 style='text-align: center; padding-top: 0.3125rem'> For the meeting/class hosted on " + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + "</h2>";
+    // Creates new student table
+    html += "<ul>" +
+                "<li class=\"table_header\">" +
+                    "<div class='column_1 center'>Student Name</div>" +
+                    "<div class='column_2 center'>Student Email</div>" +
+                    "<div class='column_3 center'>Minutes Joined</div>" +
+                "</li>";
+    // displays new student into list
     for (let s of students) { //loop through students array
         if (s.host) continue; //if the student is the host/not a guest, they must be the instructor, so skip
-        html += "<tr>";
-        if (colorFlip){ //alternates the color for visibility
-            html += "<th class='colorFlip studentTable'>" + s.name + "</th>" + "<th class='colorFlip studentTable'>" + s.email + "</th>" +"<th class='colorFlip studentTable'>" + s.timeMinutes + "</th>";
-        } else {
-            html += "<th class='studentTable'>" + s.name + "</th>" + "<th class='studentTable'>" + s.email + "</th>" +"<th class='studentTable'>" + s.timeMinutes + "</th>";
-        }
-        colorFlip = !colorFlip; //flip the boolean
-        html += "</tr>";
+        html += "<li class=\"table_row\"> <div class='column_1' style='font-size: 0.875rem;'>" + s.name +
+                    "</div>" + "<div class='column_2' style='font-size: 0.875rem;'>" + s.email + "</div>" +
+                    "<div class='column_3' style='font-size: 0.875rem;'>" + s.timeMinutes + "</div> " +
+                "</li>";
     }
-    html += "</table>";
-    let win = window.open("", "Student Attendance", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=" + (screen.height - 220));
+    html += "</ul>";
+    let win = window.open("", "Student Attendance", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=900,height=" + (screen.height - 220));
     win.document.body.innerHTML = html;
 }
