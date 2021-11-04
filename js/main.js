@@ -31,7 +31,18 @@ const handleDrop = async (e) => {
         document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
         return;
     }
-    const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
+    const fileData = await fileArray[0].text(); //because .text() returns a promise, we must 'await' for it to be fulfilled.
+    parseFile(fileData); //turn into students
+}
+
+document.getElementById("upload").addEventListener("change", manualUpload, true);
+async function manualUpload() {
+    if (document.getElementById("upload").files[0] === null) return;
+    if (document.getElementById("upload").files[0].type !== "application/vnd.ms-excel") {
+        document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
+        return;
+    }
+    const fileData = await document.getElementById("upload").files[0].text(); //because .text() returns a promise, we must 'await' for it to be fulfilled.
     parseFile(fileData); //turn into students
 }
 
