@@ -18,6 +18,8 @@ const initApp = () => {
     });
 
     droparea.addEventListener("drop", handleDrop);
+    document.querySelector('#zoomLink').addEventListener("click", openZoomLink);
+    document.querySelector('#upload').addEventListener("input", handleUpload);
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
@@ -33,6 +35,22 @@ const handleDrop = async (e) => {
     }
     const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
     parseFile(fileData); //turn into students
+}
+//TODO
+const handleUpload = async (evt) => {
+    const fileData = await evt.target.files[0].text();
+    console.log(fileData);
+
+    if (fileData.type !== "application/vnd.ms-excel") {
+        document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
+        return;
+    }
+
+    parseFile(fileData);
+}
+
+const openZoomLink = async () => {
+    window.open("https://zoom.us/account/report?isPersonal=false", '_blank') //opens to zoom report page
 }
 
 /**
