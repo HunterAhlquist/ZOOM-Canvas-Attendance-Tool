@@ -34,14 +34,14 @@ const handleDrop = async (e) => {
         return;
     }
     const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
+    console.log(fileData.type);
     parseFile(fileData); //turn into students
 }
 //TODO
 const handleUpload = async (evt) => {
     const fileData = await evt.target.files[0].text();
-    console.log(fileData);
 
-    if (fileData.type !== "application/vnd.ms-excel") {
+    if (evt.target.files[0].type !== "application/vnd.ms-excel") {
         document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
         return;
     }
