@@ -8,7 +8,7 @@
 * 5 -> Was a guest (No = meeting host/instructor, Yes = guest/student
 * 6 -> Recording consent (Y = Yes/true, (blank) = No/false)
 * */
-let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest", "Recording Consent\r"];
+let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest\r"];
 
 function parseFile(fileData) {
     let students = []; //this is the finished variable that contains StudentConnections.
