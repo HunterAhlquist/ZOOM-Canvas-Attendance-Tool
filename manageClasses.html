@@ -9,27 +9,25 @@
 </head>
 <body>
 <form>
-    <div class="form-group">
+    <div>
         <label class="entryLabel" for="cSID">Canvas student ID (not your institution's SID)</label>
-        <input class=" textEntry" type="text" name="canvasSID" id="cSID">
+        <input class="textEntry" type="text" name="canvasSID" id="cSID">
     </div>
-    <div class="form-group">
-        <label class=" entryLabel" for="sName">Full student name (as displayed on canvas)</label>
-        <input class=" textEntry" type="text" name="studentName" id="sName">
+    <div>
+        <label class="entryLabel" for="sName">Full student name (as displayed on ZOOM)</label>
+        <input class="textEntry" type="text" name="studentName" id="sName">
     </div>
-    <div class="form-group">
-        <label class=" entryLabel" for="emails">Known emails (Separate with spaces, at least one is recommended)</label>
-        <input class=" textEntry" type="text" name="studentEmails" id="emails">
+    <div>
+        <label class="entryLabel" for="emails">Known emails (Separate with spaces, at least one is recommended)</label>
+        <input class="textEntry" type="text" name="studentEmails" id="emails">
     </div>
-    <input value="Add Student" type="submit" class="upload_bottom">
-    <select>
-        <option value="0">test1</option>
-        <option value="1">test2</option>
-        <option value="2">test3</option>
-    </select>
-    <input value="Remove Student" type="submit" class="upload_bottom">
+    <input value="Add Student" type="button" id="addStudent" class="upload_bottom">
+    <div id="studentEdit">
+    </div>
+
 </form>
-
-
+<script src="js/Student.js"></script>
+<script src="js/StudentClass.js"></script>
+<script src="js/AliasCore.js"></script>
 </body>
 </html>

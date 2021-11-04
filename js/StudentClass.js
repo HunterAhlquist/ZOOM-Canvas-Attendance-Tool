@@ -4,10 +4,10 @@
  * @version 1.0
  */
 class StudentClass {
-    constructor() {
-        this.classID = 0;
-        this.title = "";
-        this.students = [];
+    constructor(classid, title, student) {
+        this.classID = classid;
+        this.title = title;
+        this.students = students;
     }
 
     addStudent(student) {

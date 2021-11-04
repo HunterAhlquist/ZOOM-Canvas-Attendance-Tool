@@ -4,10 +4,10 @@
  * @version 1.0
  */
 class Student {
-    constructor() {
-        this.sid = 0;
-        this.name = "";
-        this.emails = [];
+    constructor(sid, name, emails) {
+        this.sid = sid;
+        this.name = name;
+        this.emails = emails;
     }
 
     addKnownEmail(email) {
