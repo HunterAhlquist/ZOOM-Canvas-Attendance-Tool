@@ -1,5 +1,5 @@
 {
-  "name": "ZOOM/Canvas Attendance Tool",
+  "name": "Class Tracker",
   "description": "Import ZOOM attendance info into Canvas",
   "version": "1.0",
   "manifest_version": 3,
