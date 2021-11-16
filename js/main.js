@@ -70,9 +70,16 @@ function generateAttendanceSheet(students) {
                         ".column_1 {flex-basis: 30%; }" +
                         ".column_2 {flex-basis: 60%; }" +
                         ".column_3 {flex-basis: 10%; }" +
+                        ".button {display: inline-flex; height: 2.5rem; width: auto; border: 2px solid #BFC0C0; padding: 0.313rem 0.625rem 0.313rem 0.625rem; font-weight: 500; background: transparent; cursor: pointer; transition: all 0.3s ease; position: relative;}" +
+                        ".button a{display: flex; text-decoration: none; align-items: center; justify-content: center;}" +
+                        ".button_designs {transition: all 0.3s ease;}" +
+                        ".button_designs:hover {box-shadow: -0.438rem -0.438rem 1.25rem 0 #fff9, -0.25rem -0.25rem 0.313rem 0 #fff9, 0.438rem 0.438rem 1.25rem 0 #0002, 0.25rem 0.25rem 0.313rem 0 #0001;}" +
                     "</style>" +
                 "</head>";
     html += "<h2 style='text-align: center; padding-top: 0.3125rem'> For the meeting/class hosted on " + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + "</h2>";
+    html += "<div class='button button_designs'>" +
+                "<a href='#'>Setting placeholder</a>" +
+            "</div>";
     // Creates new student table
     html += "<ul>" +
                 "<li class=\"table_header\">" +

@@ -18,54 +18,56 @@
     <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
     <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css"/>
 
-
 </head>
-<body class="container">
-<form>
-    <!-- Add Students -->
-    <div class="container mt-4">
-        <div class="d-flex flex-row bd-highlight">
-            <h2 class="bd-highlight">Students</h2>
-            <input name='student-select-mode' id="selectStudent" class='selectMode p-2 bd-highlight w-50 ms-3'
-                   placeholder="Select a student"/>
+<body>
+<section class="container section_bg mt-4 mb-4 ps-3 pe-3 pt-2 pb-4 rounded-3">
+    <form>
+        <!-- Add Students -->
+        <div class="container mt-4">
+            <div class="d-flex flex-row bd-highlight">
+                <h2 class="bd-highlight">Students</h2>
+                <input name='student-select-mode' id="selectStudent" class='selectMode p-2 bd-highlight w-50 ms-3 bg-light'
+                       placeholder="Select a student"/>
+            </div>
+            <div class="mb-3">
+                <label for="studentID" class="form-label fs-5">Canvas Student ID</label>
+                <input type="text" class="form-control bg-light" id="studentID" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="studentName" class="form-label fs-5">Student's Name</label>
+                <input type="text" class="form-control bg-light" id="studentName">
+            </div>
+            <div class="mb-3">
+                <label for="studentEmail" class="form-label fs-5">Student's Email</label>
+                <input name='email' class="form-control tagify--outside bg-light" id="studentEmail"
+                       placeholder='Insert Student Emails'>
+            </div>
+            <button type="submit" class="btn btn-secondary">Add Student</button>
         </div>
-        <div class="mb-3">
-            <label for="studentID" class="form-label">Canvas Student ID</label>
-            <input type="text" class="form-control" id="studentID" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="studentName" class="form-label">Student's Name</label>
-            <input type="text" class="form-control" id="studentName">
-        </div>
-        <div class="mb-3">
-            <label for="studentEmail" class="form-label">Student's Email</label>
-            <input name='email' class="form-control tagify--outside" id="studentEmail"
-                   placeholder='Insert Student Emails'>
-        </div>
-        <button type="submit" class="btn btn-secondary">Add Student</button>
-    </div>
 
-    <!-- Add classes -->
-    <div class="container mt-5">
-        <div class="d-flex flex-row bd-highlight">
-            <h2>Classes</h2>
-            <select id="selectStudent" class="btn btn-secondary dropdown-toggle p-2 bd-highlight ms-3">
-                <option>Select a Class</option>
-            </select>
+        <!-- Add classes -->
+        <div class="container mt-5">
+            <div class="d-flex flex-row bd-highlight">
+                <h2>Classes</h2>
+                <select id="selectClass" class="btn btn-secondary dropdown-toggle p-2 bd-highlight ms-3">
+                    <option>Select a Class</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="classID" class="form-label fs-5">Canvas Class ID</label>
+                <input type="text" class="form-control bg-light" id="classID" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="classTitle" class="form-label fs-5">Class Title</label>
+                <input type="text" class="form-control bg-light" id="classTitle">
+            </div>
+            <div class="mb-3">
+                <input name='class-select-mode' id="addStudentClass bg-light" class='form-control tagify--outside'
+                       placeholder="Select a student">
+            </div>
+            <button type="submit" class="btn btn-secondary">Add Class</button>
         </div>
-        <div class="mb-3">
-            <label for="classID" class="form-label">Canvas Class ID</label>
-            <input type="text" class="form-control" id="classID" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="classTitle" class="form-label">Class Title</label>
-            <input type="text" class="form-control" id="classTitle">
-        </div>
-        <div class="mb-3">
-            <input name='class-select-mode' id="addStudentClass" class='form-control tagify--outside' placeholder="Select a student">
-        </div>
-        <button type="submit" class="btn btn-secondary">Add Class</button>
-    </div>
-</form>
+    </form>
+</section>
 </body>
 </html>
