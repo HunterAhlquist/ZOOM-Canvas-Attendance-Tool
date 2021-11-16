@@ -18,6 +18,8 @@ const initApp = () => {
     });
 
     droparea.addEventListener("drop", handleDrop);
+    document.querySelector('#zoomLink').addEventListener("click", openZoomLink);
+    document.querySelector('#upload').addEventListener("input", handleUpload);
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
@@ -31,19 +33,24 @@ const handleDrop = async (e) => {
         document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
         return;
     }
-    const fileData = await fileArray[0].text(); //because .text() returns a promise, we must 'await' for it to be fulfilled.
+    const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
+    console.log(fileData.type);
     parseFile(fileData); //turn into students
 }
+//TODO
+const handleUpload = async (evt) => {
+    const fileData = await evt.target.files[0].text();
 
-document.getElementById("upload").addEventListener("change", manualUpload, true);
-async function manualUpload() {
-    if (document.getElementById("upload").files[0] === null) return;
-    if (document.getElementById("upload").files[0].type !== "application/vnd.ms-excel") {
+    if (evt.target.files[0].type !== "application/vnd.ms-excel") {
         document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
         return;
     }
-    const fileData = await document.getElementById("upload").files[0].text(); //because .text() returns a promise, we must 'await' for it to be fulfilled.
-    parseFile(fileData); //turn into students
+
+    parseFile(fileData);
+}
+
+const openZoomLink = async () => {
+    window.open("https://us02web.zoom.us/account/report/user", '_blank') //opens to zoom report page
 }
 
 /**

@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Class Tracker</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
 </head>
 <body>
     <div>
-        <h2>Zoom Attendance Tool</h2>
+        <h2>Zoom Attendance Evaluator</h2>
     </div>
     <div class="drop-area">
         <i class="bi bi-file-earmark-arrow-up"></i>
@@ -16,7 +16,14 @@
     </div>
     <div class="button-wrap">
         <label class="upload_bottom" for="upload">Upload</label>
-        <input id="upload" type="file" name="CSV File">
+        <input id="upload" type="file" name="files[]">
+    </div>
+
+    <div class="button-wrap">
+        <label id="zoomLink" class="upload_bottom">Link to Zoom</label>
+        <h2>Help</h2>
+        <p style="margin: 1em;">Under the participants column of this page, click the number of participants corresponding to the date and
+        time of which you want to get a report for. Leave all checkboxes unchecked.</p>
     </div>
     <!-- Note don't remove this div below. it throws error if removed -->
     <div class="bottom" id="bottom">

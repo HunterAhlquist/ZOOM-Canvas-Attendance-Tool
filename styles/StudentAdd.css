@@ -1,0 +1,45 @@
+/*
+Start of Tagify styles
+ */
+body{
+    font: 13px arial;
+}
+
+/* method 1 */
+.tagify__tag + .tagify__input::before{ opacity:0; }
+
+/* method 2 */
+.tagify:not(.tagify--noTags){
+    --placeholder-color: transparent;
+    --placeholder-color-focus: transparent;
+}
+
+.tagify+input{
+    display: block !important;
+    position: static !important;
+    transform: none !important;
+    width: 100%;
+    margin-top: 1em;
+    padding: .5em;
+}
+
+.tagify--outside{
+    border: 0;
+}
+
+.tagify--outside .tagify__input{
+    order: -1;
+    flex: 100%;
+    border: 1px solid var(--tags-border-color);
+    margin-bottom: 1em;
+    transition: .1s;
+}
+
+.tagify--outside .tagify__input:hover{ border-color:var(--tags-hover-border-color); }
+.tagify--outside.tagify--focus .tagify__input{
+    transition:0s;
+    border-color: var(--tags-focus-border-color);
+}
+/*
+End of Tagify styles
+ */
