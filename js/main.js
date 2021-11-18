@@ -53,7 +53,7 @@ const handleUpload = async (evt) => {
 }
 
 const openZoomLink = async () => {
-    window.open("https://us02web.zoom.us/account/report/user", '_blank') //opens to zoom report page
+    window.open("https://us02web.zoom.us/account/", '_blank') //opens to zoom report page
 }
 
 /**
