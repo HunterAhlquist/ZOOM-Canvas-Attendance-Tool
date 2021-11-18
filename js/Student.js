@@ -9,7 +9,6 @@ class Student {
         this.name = name;
         this.emails = emails;
     }
-
     addKnownEmail(email) {
         if (typeof email !== typeof "string") return false; //valid parameter check
         for (let e of this.emails) if (e === email) return false; //duplicate email check
@@ -33,4 +32,18 @@ class Student {
         if (typeof targetClass === typeof new StudentClass()) return false; //valid parameter check
         return targetClass.removeStudent(this);
     }
+}
+
+function FindStudentInArray(array, sid) {
+    for (let s of array){
+        if (s.sid === sid) return s;
+    }
+    return null;
+}
+
+function GetStudentSIDInArray(array, sid) {
+    for (let i=0; i < array.length; i++) {
+        if (array[i].sid === sid) return i;
+    }
+    return null;
 }

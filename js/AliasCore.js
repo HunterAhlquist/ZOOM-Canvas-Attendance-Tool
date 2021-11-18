@@ -1,6 +1,9 @@
 let students = [];
 let classes = [];
 
+let curStudent;
+let curClass;
+
 function SaveDataLocal() {
     chrome.storage.local.clear(function () {
         console.log("deleted all")
@@ -15,35 +18,91 @@ function SaveDataLocal() {
 
 function LoadDataLocal() {
     chrome.storage.local.get('students', function (data) {
+        if (data.students === undefined || data.students.length <= 0) return;
         students = data.students;
-        if (students.length > 0){
-            document.getElementById("studentEdit").innerHTML = "<select class=\"entryLabel\" id=\"studentList\">\n" +
-                "        </select>\n" +
-                "        <input value=\"Remove Student\" type=\"button\" class=\"upload_bottom\">";
-            let selector = document.getElementById("studentList");
-            for (let s of students) {
-                selector.innerHTML += "<option value='" + s.sid + "'>" + s.name + "</option> \r\n";
-            }
-        }
+        PopulateStudents(studentEditSelector);
+        PopulateStudents(classStudentField);
     });
     chrome.storage.local.get('classes', function (data) {
-        classes = data.students;
+        if (data.classes === undefined || data.classes.length <= 0) return;
+        classes = data.classes;
+        PopulateClasses(classEditSelector);
     });
+
 }
 
-let sidField = document.getElementById("cSID");
-let nameField = document.getElementById("sName");
-let emailsField = document.getElementById("emails");
+//Add student variables
+let studentEditSelector = document.getElementById("selectStudent");
+let studentIDField = document.getElementById("studentID");
+let studentNameField = document.getElementById("studentName");
+let studentSaveButton = document.getElementById("saveStudent");
 
-document.getElementById("addStudent").addEventListener('click', function () {
-    let emails = emailsField.value.split(' ');
-    CreateNewStudent(sidField.value, nameField.value, emails);
+//Add class variables
+let classEditSelector = document.getElementById("selectClass");
+let classIDField = document.getElementById("classID");
+let classTitleField = document.getElementById("classTitle");
+let classStudentField = document.getElementById("selectClassStudent");
+let classSaveButton = document.getElementById("saveClass");
+
+//change events
+studentEditSelector.addEventListener('change', function () { //change student to edit (or keep it new)
+    tagify_Email.removeAllTags();
+    if (studentEditSelector.value === "-") {
+        studentSaveButton.innerText = "Add Student";
+        studentSaveButton.value = "add";
+        studentIDField.value = "";
+        studentNameField.value = "";
+        return;
+    }
+    studentSaveButton.innerText = "Save Student";
+    studentSaveButton.value = "save";
+    let student = FindStudentInArray(students, studentEditSelector.value);
+    studentIDField.value = student.sid;
+    studentNameField.value = student.name;
+    tagify_Email.addTags(student.emails);
 });
 
-function CreateNewStudent(sid, name, knownEmails) {
-    let newStudent = new Student(sid, name, knownEmails);
-    students[newStudent.sid] = newStudent;
-    SaveDataLocal();
-}
+classEditSelector.addEventListener('change', function () { //change class to edit (or create new one)
+    if (studentEditSelector.value === "-") return;
+});
+//click events
+studentSaveButton.addEventListener('click', function () {
+    let oldData = students[GetStudentSIDInArray(students, studentEditSelector.value)];
+    tagify_Email.removeAllTags();
+    let emails = tagify_Email.value;
+    if (studentSaveButton.value === "add") {
+        if (studentIDField.value !== "" && studentNameField.value !== "" && emails.length > 0) {
+            students.push(new Student(studentIDField.value, studentNameField.value, emails));
+        } else { //one or more are blank
 
+        }
+    } else if (studentSaveButton.value === "save") {
+        students[GetStudentSIDInArray(students, studentEditSelector.value)] = new Student(studentIDField.value, studentNameField.value, emails);
+
+    }
+    SaveDataLocal();
+    PopulateStudents(studentEditSelector);
+    PopulateStudents(classStudentField);
+    studentEditSelector.value = students[GetStudentSIDInArray(students, oldData.sid)].sid;
+});
+classSaveButton.addEventListener('click', function () {
+
+});
+
+
+//general functions
+function PopulateStudents(selector) {
+    let options = "<option>-</option> \r\n";
+    for (let s of students) {
+        options += "<option value='" + s.sid + "'>" + s.name + "</option> \r\n";
+    }
+    selector.innerHTML = options;
+}
+function PopulateClasses(selector) {
+    let options = "<option>-</option> \r\n";
+    for (let c of classes) {
+        options += "<option value='" + c.classID + "'>" + c.title + "</option> \r\n";
+    }
+    selector.innerHTML = options;
+}
 LoadDataLocal();

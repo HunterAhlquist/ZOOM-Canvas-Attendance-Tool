@@ -23,6 +23,9 @@ const initApp = () => {
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
+document.getElementById("openSettings", function () {
+    chrome.tabs.create({url: chrome.runtime.getURL('StudentAdd.html')});
+});
 
 const handleDrop = async (e) => {
     const dt = e.dataTransfer;
