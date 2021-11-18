@@ -15,9 +15,14 @@
     <form>
         <!-- Add Students -->
         <div class="container mt-4">
-            <select id="selectStudent" class="btn btn-secondary dropdown-toggle p-2 bd-highlight ms-3">
-                <option value="none" selected>-</option>
-            </select>
+            <div class="d-flex flex-row bd-highlight">
+                <h2 class="bd-highlight">Students</h2>
+                <select id="selectStudent" class="btn btn-secondary dropdown-toggle p-2 bd-highlight ms-3">
+                    <option value="none" selected>Student</option>
+                    <option value="none">-</option>
+                    <option value="none">-</option>
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="studentID" class="form-label fs-5">Canvas Student ID</label>
                 <input type="text" class="form-control bg-light" id="studentID" aria-describedby="emailHelp">
