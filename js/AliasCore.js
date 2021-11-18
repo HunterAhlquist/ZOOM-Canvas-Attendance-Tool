@@ -67,23 +67,24 @@ classEditSelector.addEventListener('change', function () { //change class to edi
 });
 //click events
 studentSaveButton.addEventListener('click', function () {
-    let oldData = students[GetStudentSIDInArray(students, studentEditSelector.value)];
+    let data = students[GetStudentSIDInArray(students, studentEditSelector.value)]; //store old data or place null
     tagify_Email.removeAllTags();
     let emails = tagify_Email.value;
-    if (studentSaveButton.value === "add") {
+    if (studentSaveButton.value === "add") { //add new
         if (studentIDField.value !== "" && studentNameField.value !== "" && emails.length > 0) {
-            students.push(new Student(studentIDField.value, studentNameField.value, emails));
+            data = new Student(studentIDField.value, studentNameField.value, emails)
+            students.push(data);
         } else { //one or more are blank
 
         }
-    } else if (studentSaveButton.value === "save") {
+    } else if (studentSaveButton.value === "save") { //replace instead of add
         students[GetStudentSIDInArray(students, studentEditSelector.value)] = new Student(studentIDField.value, studentNameField.value, emails);
 
     }
     SaveDataLocal();
     PopulateStudents(studentEditSelector);
     PopulateStudents(classStudentField);
-    studentEditSelector.value = students[GetStudentSIDInArray(students, oldData.sid)].sid;
+    studentEditSelector.value = students[GetStudentSIDInArray(students, data.sid)].sid;
 });
 classSaveButton.addEventListener('click', function () {
 
