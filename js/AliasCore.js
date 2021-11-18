@@ -21,7 +21,6 @@ function LoadDataLocal() {
         if (data.students === undefined || data.students.length <= 0) return;
         students = data.students;
         PopulateStudents(studentEditSelector);
-        PopulateStudents(classStudentField);
     });
     chrome.storage.local.get('classes', function (data) {
         if (data.classes === undefined || data.classes.length <= 0) return;
@@ -67,24 +66,26 @@ classEditSelector.addEventListener('change', function () { //change class to edi
 });
 //click events
 studentSaveButton.addEventListener('click', function () {
-    let data = students[GetStudentSIDInArray(students, studentEditSelector.value)]; //store old data or place null
-    tagify_Email.removeAllTags();
     let emails = tagify_Email.value;
+    console.log(emails);
     if (studentSaveButton.value === "add") { //add new
-        if (studentIDField.value !== "" && studentNameField.value !== "" && emails.length > 0) {
-            data = new Student(studentIDField.value, studentNameField.value, emails)
-            students.push(data);
+        if (studentIDField.value !== "" && studentNameField.value !== "") {
+            let newStudent = new Student(studentIDField.value, studentNameField.value, emails);
+            students.push(new Student(studentIDField.value, studentNameField.value, emails));
+            PopulateStudents(studentEditSelector);
+            studentEditSelector.value = newStudent.sid;
         } else { //one or more are blank
 
         }
     } else if (studentSaveButton.value === "save") { //replace instead of add
-        students[GetStudentSIDInArray(students, studentEditSelector.value)] = new Student(studentIDField.value, studentNameField.value, emails);
-
+        let newStudent =  new Student(studentIDField.value, studentNameField.value, emails)
+        students[GetStudentSIDInArray(students, studentEditSelector.value)] = newStudent;
+        PopulateStudents(studentEditSelector);
+        studentEditSelector.value = newStudent.sid;
     }
+
     SaveDataLocal();
-    PopulateStudents(studentEditSelector);
-    PopulateStudents(classStudentField);
-    studentEditSelector.value = students[GetStudentSIDInArray(students, data.sid)].sid;
+
 });
 classSaveButton.addEventListener('click', function () {
 

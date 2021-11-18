@@ -2,14 +2,12 @@
 
 // Student Email Selection
 var studentEmail_input = document.getElementById('studentEmail');
-var studentClass_input = document.getElementById('studentList');
 var tagify_Email = new Tagify(studentEmail_input, {
     dropdown: {
         enabled: 0
     },
     whitelist: ["Student@Student.com"]
 });
-var tagify_StudentsInClass = new Tagify(studentClass_input);
 
 
 // Single Value Selection Tagify

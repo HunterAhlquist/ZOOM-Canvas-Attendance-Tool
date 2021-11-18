@@ -31,7 +31,7 @@
                 <input name='email' class="form-control tagify--outside bg-light" id="studentEmail"
                        placeholder='Insert Student Emails'>
             </div>
-            <button type="button" id="saveStudent" class="btn btn-secondary">Add Student</button>
+            <button type="button" value="add" id="saveStudent" class="btn btn-secondary">Add Student</button>
         </div>
 
         <!-- Add classes -->
@@ -50,28 +50,19 @@
                 <label for="classTitle" class="form-label fs-5">Class Title</label>
                 <input type="text" class="form-control bg-light" id="classTitle">
             </div>
-            <div class="mb-3">
-                <select id="selectClassStudent" class="btn btn-secondary dropdown-toggle p-2 bd-highlight ms-3">
-                    <option value="none" selected>-</option>
-                </select><button type="button" id="addStudent" class="btn btn-secondary">Add Student to Class</button>
-                <div class="mb-3">
-                    <label for="studentEmail" class="form-label fs-5">Student's Email</label>
-                    <input name='email' class="form-control tagify--outside bg-light" id="studentList"
-                           placeholder='Insert Student Emails'>
-                </div>
-            </div>
             <button type="button" id="saveClass" class="btn btn-secondary">Add Class</button>
         </div>
     </form>
 </section>
 </body>
-<script defer src="lib/bootstrap.bundle.min.js"></script>
-<script defer src="lib/jquery-3.6.0.min.js"></script>
-<script defer src="lib/tagify.min.js"></script>
-<script defer src="lib/tagify.polyfills.min.js"></script>
-<script defer src="js/StudentAdd.js"></script>
-<script defer src="js/AliasCore.js"></script>
-<script defer src="js/Student.js"></script>
-<script defer src="js/StudentClass.js"></script>
+<script dsrc="lib/bootstrap.bundle.min.js"></script>
+<script src="lib/jquery-3.6.0.min.js"></script>
+<script src="lib/tagify.min.js"></script>
+<script src="lib/tagify.polyfills.min.js"></script>
+<script src="js/StudentAdd.js"></script>
+<script src="js/Student.js"></script>
+<script src="js/StudentClass.js"></script>
+<script src="js/AliasCore.js"></script>
+
 
 </html>
