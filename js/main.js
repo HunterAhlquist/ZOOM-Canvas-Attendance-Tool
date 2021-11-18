@@ -23,7 +23,7 @@ const initApp = () => {
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
-document.getElementById("openSettings", function () {
+document.getElementById("openSettings").addEventListener('click', function () {
     chrome.tabs.create({url: chrome.runtime.getURL('StudentAdd.html')});
 });
 
