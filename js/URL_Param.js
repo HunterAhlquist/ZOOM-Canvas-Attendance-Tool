@@ -1,3 +1,5 @@
+// First option (gets URL params from ZOOM to pick date. but isn't to user friendly)
+
 // GET URL param
 function getURL() {
     let fromDate = getURLParams('from')
@@ -23,7 +25,7 @@ function getURLParams(findParam) {
     }
 }
 
-// Second way
+// Second Option (very user friendly, but needs more work)
 
 //Push URL param
 function pushData() {
@@ -31,6 +33,8 @@ function pushData() {
     let getToDate = document.getElementById("toDate").value;
 
     if (getFromDate == null || getFromDate === "" && getToDate == null || getToDate === "") {
+        document.getElementById("dateError").innerHTML = `<h3 style="color: red;">Please choose a valid date</h3>`;
+    } else if (getToDate < getFromDate) {
         document.getElementById("dateError").innerHTML = `<h3 style="color: red;">Please choose a valid date</h3>`;
     } else {
         // format date
@@ -50,3 +54,20 @@ function pushData() {
     }
 }
 
+
+// Automatically loads a set date for From & To inputs
+let fromField = document.getElementById('fromDate');
+let toField = document.getElementById('toDate');
+
+let todaysDate = new Date();
+let yesterdaysDate = new Date(todaysDate);
+
+yesterdaysDate.setDate(yesterdaysDate.getDate() - 1)
+
+// sets the date
+fromField.value = todaysDate.getFullYear().toString() + '-' + todaysDate.getMonth().toString().padStart(2, 0)
+    + '-' + yesterdaysDate.getDate().toString().padStart(2, 0);
+
+
+toField.value = todaysDate.getFullYear().toString() + '-' + (todaysDate.getMonth() + 1).toString().padStart(2, 0)
+    + '-' + todaysDate.getDate().toString().padStart(2, 0);
