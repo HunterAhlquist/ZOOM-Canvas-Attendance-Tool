@@ -1,0 +1,47 @@
+body {
+    background-color: #e9ecef;
+}
+
+table {
+    width: 100%
+}
+
+.Datacells_styling {
+    text-align: left;
+    background: #ffffff;
+}
+
+.top_dataCell {
+    padding: 36px 24px 0;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    border-top: 3px solid #d4dadf;
+}
+
+.MB_dataCell {
+    padding: 24px;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#redo_button {
+    display: inline-block;
+    padding: 16px 36px;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+p {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 48px;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link>
+</head>
+<body>
+<input type="text" name="url" id="url">
+<button onclick="getURL()">Add ZOOM URL for Date/Time</button>
+<p id="print"></p><br>
+
+<label for="fromDate">From:</label>
+<input type="date" id="fromDate" required pattern="\d{4}-\d{2}-\d{2}">
+
+<label for="toDate">To:</label>
+<input type="date" id="toDate" required pattern="\d{4}-\d{2}-\d{2}">
+<input type="submit" onclick="pushData()">
+
+<p id="printDates"></p><br>
+
+</body>
+<script src="js/URL_Param.js"></script>
+</html>
