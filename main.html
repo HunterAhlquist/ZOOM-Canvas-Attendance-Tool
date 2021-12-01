@@ -13,13 +13,13 @@
 
 <div class="button-wrap">
     <h3>Please choose a certain date for your file</h3>
-
+    <div class="dateError" id="dateError"></div>
     <label for="fromDate">From:</label>
     <input type="date" id="fromDate" required pattern="\d{4}-\d{2}-\d{2}">
     <br>
     <label for="toDate">To:</label>
     <input type="date" id="toDate" required pattern="\d{4}-\d{2}-\d{2}">
-    <label id="zoomLink" class="upload_bottom" style="font-size: 1.25rem !important;">Submit to Zoom</label>
+    <label id="zoomLink" class="upload_bottom" style="font-size: 1.25rem !important;">Submit date to Zoom</label>
 </div>
 
 <div class="drop-area">
@@ -29,6 +29,10 @@
 <div class="button-wrap">
     <label class="upload_bottom" for="upload">Browse Files</label>
     <input id="upload" type="file" name="files[]">
+</div>
+
+<div class="button-wrap">
+    <label id="openZoomAcc" class="upload_bottom">Go to ZOOM</label>
 </div>
 
 <div class="button-wrap">

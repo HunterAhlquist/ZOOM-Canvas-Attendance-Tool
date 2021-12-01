@@ -19,6 +19,7 @@ const initApp = () => {
 
     droparea.addEventListener("drop", handleDrop);
     document.querySelector('#zoomLink').addEventListener("click", pushData);
+    document.querySelector('#openZoomAcc').addEventListener("click", openZoomLink);
     document.querySelector('#upload').addEventListener("input", handleUpload);
 }
 
@@ -51,14 +52,11 @@ const handleUpload = async (evt) => {
     parseFile(fileData);
 }
 
+function openZoomLink() {
+    let accountURL = new URL("https://zoom.us/profile");
+    window.open(decodeURIComponent(accountURL)); //opens to zoom profile page
 
-/*
-DELETE for later??
-
-const openZoomLink = async () => {
-    window.open("https://zoom.us/account/report/user", '_blank') //opens to zoom report page
 }
- */
 
 /**
  * Opens a new window displaying

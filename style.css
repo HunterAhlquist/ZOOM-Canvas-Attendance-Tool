@@ -50,6 +50,7 @@ body {
 }
 
 h3 {
+    margin-top: 0;
     text-align: center;
 }
 
@@ -96,6 +97,7 @@ body div h2 {
 }
 
 div:nth-of-type(2) {
+
     text-align: center;
 }
 

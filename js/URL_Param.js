@@ -29,18 +29,24 @@ function getURLParams(findParam) {
 function pushData() {
     let getFromDate = document.getElementById("fromDate").value;
     let getToDate = document.getElementById("toDate").value;
-    // format date
-    let rdFrom = getFromDate.split('-');
-    let rdTo = getToDate.split('-');
 
-    let formatFrom = rdFrom[1] + "/" + rdFrom[2] + "/" + rdFrom[0];
-    let formatTo = rdTo[1] + "/" + rdTo[2] + "/" + rdTo[0];
+    if (getFromDate == null || getFromDate === "" && getToDate == null || getToDate === "") {
+        document.getElementById("dateError").innerHTML = `<h3 style="color: red;">Please choose a valid date</h3>`;
+    } else {
+        // format date
+        let rdFrom = getFromDate.split('-');
+        let rdTo = getToDate.split('-');
+
+        let formatFrom = rdFrom[1] + "/" + rdFrom[2] + "/" + rdFrom[0];
+        let formatTo = rdTo[1] + "/" + rdTo[2] + "/" + rdTo[0];
 
 
-    // pushing to ZOOM URL
-    let zoomURL = new URL("https://zoom.us/account/report/user?from=FromDate&to=ToDate");
-    zoomURL.searchParams.set('from', formatFrom);
-    zoomURL.searchParams.set('to', formatTo);
+        // pushing to ZOOM URL
+        let zoomURL = new URL("https://zoom.us/account/report/user?from=FromDate&to=ToDate");
+        zoomURL.searchParams.set('from', formatFrom);
+        zoomURL.searchParams.set('to', formatTo);
 
-    window.open(decodeURIComponent(zoomURL));
+        window.open(decodeURIComponent(zoomURL));
+    }
 }
+
