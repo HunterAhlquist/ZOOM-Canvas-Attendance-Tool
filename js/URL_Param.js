@@ -30,15 +30,18 @@ function pushData(){
     let getFromDate = document.getElementById("fromDate").value;
     let getToDate = document.getElementById("toDate").value;
     // format date
-    let formatFrom = getFromDate.split('-');
-    let formatTo = getFromDate.split('-');
-    for (let i = 0; i < formatFrom.length; i++){
-        formatFrom
-    }
+    let rdFrom = getFromDate.split('-');
+    let rdTo = getToDate.split('-');
+
+    let formatFrom = rdFrom[1] + "/" + rdFrom[2] + "/" + rdFrom[0];
+    let formatTo = rdTo[1] + "/" + rdTo[2] + "/" + rdTo[0];
+
 
 
     // Implement pushing to ZOOM URL
-    // ....
+    let zoomURL = new URL("https://zoom.us/account/report/user?from=FromDate&to=ToDate");
+    zoomURL.searchParams.set('from',formatFrom);
+    zoomURL.searchParams.set('to',formatTo);
 
-    document.getElementById("printDates").innerHTML = getFromDate + "<br>"+ getToDate;
+    document.getElementById("printDates").innerHTML = decodeURIComponent(zoomURL);
 }
