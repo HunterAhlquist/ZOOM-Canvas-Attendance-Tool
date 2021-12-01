@@ -3,13 +3,14 @@
  * @author Hunter A.
  * @version 0.01
  */
-let recordDate = "w";
+let recordDate = "";
 class StudentConnection {
     constructor() {
         this.name = "";
         this.email = "";
         this.timeMinutes = 0;
         this.host = false;
+        this.unknown = false;
     }
 
     /**

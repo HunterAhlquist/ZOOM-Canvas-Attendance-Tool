@@ -8,80 +8,100 @@
 * 5 -> Was a guest (No = meeting host/instructor, Yes = guest/student
 * 6 -> Recording consent (Y = Yes/true, (blank) = No/false)
 * */
-let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest\r"];
+let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest"];
+let studentsConnections = []; //this is the finished variable that contains StudentConnections.
+let unknownStudents = []; //if no match for a student is found
 
 function parseFile(fileData) {
-    let students = []; //this is the finished variable that contains StudentConnections.
-
-    //create column definitions via a key/value pair
-    let buffer = ""; //stores current value of string
-    let colDef = []; //contains definitions of what each column is
-    let colCount = 0; //number of columns counted in this csv
-    let curCol = 0;
-    let defineCol = true;
-    let curLine = [];
-
-
-    //Loop through each character in the csv
-    for (let i = 0; i < fileData.length; i++) {
-        let char = fileData.charAt(i);
-        if (char === ',') {
-            if (defineCol) { //if the first line
-                colDef[colCount] = buffer;
-                colCount++;
-                buffer = "";
-                continue;
-            }
-            curLine[curCol] = buffer;
-            curCol++;
-            buffer = "";
-            continue;
+    //Create Array from file
+    let rawLines = fileData.split('\r\n');
+    let colDef = rawLines[0].split(",");
+    if (JSON.stringify(properCSVFormat) !== JSON.stringify(colDef)) {
+        if (confirm("WARNING: File does not match proper format, continuing may add unrelated data to the students list!")){
+            //do nothing
+            console.log("Don't say I didn't warn you...")
+        } else {
+            return;
         }
-        if (char === '\n'){
-            if (defineCol){ //if the first line
-                colDef[colCount] = buffer;
-                colCount++;
-                buffer = "";
-                defineCol = false;
-                console.log(colDef.length);
-                for (let i = 0; i < colDef.length; i++) { //loop through all the defined columns to check if the CSV format is proper
-                    console.log(colDef[i] + " " + properCSVFormat[i]);
-                    if (colDef[i] !== properCSVFormat[i]) {
-                        //display an incorrect format error
-                        document.getElementById("bottom").innerHTML = `<h3 style="color: red;">Please upload a ZOOM attendance record csv file</h3>`;
-                        return;
-                    }
-                }
-                //reset the error prompt
-                document.getElementById("bottom").innerHTML = ``;
-            } else {
-                //Add or update student
-                let alreadyAdded = false;
-                for (let s of students) { //loop through students already added, to see if they can be merged
-                    alreadyAdded = s.checkMatch(curLine[0], curLine[1]); //check if a student was already entered
-                    if (alreadyAdded){
-                        s.addTime(parseFloat(curLine[4])); //Merge times
-                        break;
-                    }
-                }
-                if (!alreadyAdded) {
-                    students[students.length] = new StudentConnection(); //create new student object
-                    students[students.length - 1].name = curLine[0]; //add the name
-                    students[students.length - 1].email = curLine[1]; //add the email
-                    students[students.length - 1].addTime(parseFloat(curLine[4])); //add their time
-                    if (curLine[5] === "No") { //host check
-                        students[students.length - 1].host = true;
-                        recordDate = curLine[2]; //get meeting time
-                    }
-                }
-
-                buffer = ""; //reset buffer
-                curLine = []; //clear current line
-                curCol = 0;
-            }
-            continue;
-        }
-        buffer += char; //add character to buffer
     }
-    generateAttendanceSheet(students); //display attendance window with data
+    let entries = [];
+    for (let i=0;i <rawLines.length;i++){
+        if (i === 0) continue;
+        if (rawLines[i].length <= 0) continue; //skip blank lines
+        entries.push(rawLines[i].split(","));
+    }
+    for (let i=0;i <entries.length;i++){
+        processLine(entries[i]);
+    }
+
+    //save unknown students as new in chrome data
+    for (let i=0; i < unknownStudents.length; i++){
+        if (!AttemptStudentMerge(unknownStudents[i])){
+            let emails = [];
+            if (unknownStudents[i].email.length > 0) emails.push(unknownStudents[i].email);
+            students.push(new Student(uuidv4(), unknownStudents[i].name, emails))
+        }
+    }
+    unknownStudents = [];
+    SaveDataLocal();
+
+    generateAttendanceSheet(studentsConnections); //display attendance window with data
+}
+
+function processLine(curLine) {
+    if (curLine[0] === "arazabdulmajeed") {
+
+    }
+    if (curLine[5] !== "No") { //skip if host
+        let matchResult = FindMatchFromStudentAttendance(curLine);
+        if (matchResult.student !== null) {
+            if (matchResult.unmatchedEmail !== null && matchResult.unmatchedName.length > 0) {//new email found with name
+                console.log("Adding new email");
+                students[students.indexOf(matchResult.student)].addKnownEmail(curLine[1]);
+            }
+            if (matchResult.unmatchedName !== null) {//new name found with email (might be a ZOOM username)
+                console.log("Unsupported");
+            }
+            let connectionMatch = null;
+            for (let sc in studentsConnections) {
+                if (sc.checkMatch(curLine[0], curLine[1])) {
+                    connectionMatch = sc;
+                }
+            }
+            if (connectionMatch == null) {
+                connectionMatch = new StudentConnection();
+                connectionMatch.name = curLine[0];
+                connectionMatch.email = curLine[1];
+                connectionMatch.addTime(curLine[4]);
+                studentsConnections.push(connectionMatch);
+
+            } else {
+                studentsConnections[studentsConnections.indexOf(connectionMatch)].addTime(curLine[4]);
+            }
+
+        } else { //create new student connection
+            let connectionMatch = null;
+
+            for (let i=0; i < studentsConnections.length; i++) {
+                if (studentsConnections[i].checkMatch(curLine[0], curLine[1])) {
+                    connectionMatch = studentsConnections[i];
+                }
+            }
+            if (connectionMatch == null) {
+                let newConnection = new StudentConnection();
+                newConnection.name = curLine[0];
+                newConnection.email = curLine[1];
+                newConnection.addTime(curLine[4]);
+                newConnection.unknown = true;
+                studentsConnections.push(newConnection);
+                connectionMatch = newConnection;
+            } else {
+                studentsConnections[studentsConnections.indexOf(connectionMatch)].addTime(curLine[4]);
+            }
+            unknownStudents.push(connectionMatch);
+        }
+    } else {
+        recordDate = curLine[2];
+    }
+
 }

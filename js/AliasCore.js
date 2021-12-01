@@ -30,81 +30,43 @@ function LoadDataLocal() {
 
 }
 
-//Add student variables
-let studentEditSelector = document.getElementById("selectStudent");
-let studentIDField = document.getElementById("studentID");
-let studentNameField = document.getElementById("studentName");
-let studentSaveButton = document.getElementById("saveStudent");
-
-//Add class variables
-let classEditSelector = document.getElementById("selectClass");
-let classIDField = document.getElementById("classID");
-let classTitleField = document.getElementById("classTitle");
-let classStudentField = document.getElementById("selectClassStudent");
-let classSaveButton = document.getElementById("saveClass");
-
-//change events
-studentEditSelector.addEventListener('change', function () { //change student to edit (or keep it new)
-    tagify_Email.removeAllTags();
-    if (studentEditSelector.value === "-") {
-        studentSaveButton.innerText = "Add Student";
-        studentSaveButton.value = "add";
-        studentIDField.value = "";
-        studentNameField.value = "";
-        return;
-    }
-    studentSaveButton.innerText = "Save Student";
-    studentSaveButton.value = "save";
-    let student = FindStudentInArray(students, studentEditSelector.value);
-    studentIDField.value = student.sid;
-    studentNameField.value = student.name;
-    tagify_Email.addTags(student.emails);
-});
-
-classEditSelector.addEventListener('change', function () { //change class to edit (or create new one)
-    if (studentEditSelector.value === "-") return;
-});
-//click events
-studentSaveButton.addEventListener('click', function () {
-    let emails = tagify_Email.value;
-    console.log(emails);
-    if (studentSaveButton.value === "add") { //add new
-        if (studentIDField.value !== "" && studentNameField.value !== "") {
-            let newStudent = new Student(studentIDField.value, studentNameField.value, emails);
-            students.push(new Student(studentIDField.value, studentNameField.value, emails));
-            PopulateStudents(studentEditSelector);
-            studentEditSelector.value = newStudent.sid;
-        } else { //one or more are blank
+//to use with student connection objects
+function AttemptStudentMerge(unknownStudent) {
+    for (let i=0; i<students.length; i++) {
+        if (students[i].checkKnownEmail(unknownStudent.email)) {
+            return true;
+        }
+        if (students[i].checkName(unknownStudent.name)) {
+            if (unknownStudent.email.length <= 0) {
+                return true;
+            } else {
+                students[i].addKnownEmail(unknownStudent.email);
+                return true;
+            }
 
         }
-    } else if (studentSaveButton.value === "save") { //replace instead of add
-        let newStudent =  new Student(studentIDField.value, studentNameField.value, emails)
-        students[GetStudentSIDInArray(students, studentEditSelector.value)] = newStudent;
-        PopulateStudents(studentEditSelector);
-        studentEditSelector.value = newStudent.sid;
     }
+    return false;
+}
 
-    SaveDataLocal();
-
-});
-classSaveButton.addEventListener('click', function () {
-
-});
-
-
-//general functions
-function PopulateStudents(selector) {
-    let options = "<option>-</option> \r\n";
+function FindMatchFromStudentAttendance(rows) {
+    //check for email match (more important)
     for (let s of students) {
-        options += "<option value='" + s.sid + "'>" + s.name + "</option> \r\n";
+        if (s.email.match(rows[1])) {
+            if (s.name === rows[0]) return {student:s, unmatchedEmail:null, unmatchedName:null};
+            else return {student:s, unmatchedEmail:null, unmatchedName:rows[0]};
+        }
+
     }
-    selector.innerHTML = options;
-}
-function PopulateClasses(selector) {
-    let options = "<option>-</option> \r\n";
-    for (let c of classes) {
-        options += "<option value='" + c.classID + "'>" + c.title + "</option> \r\n";
+    //check for name match (less important)
+    for (let s of students) {
+        if (s.name === rows[0]) return {student:s, unmatchedEmail:rows[1], unmatchedName:null};
     }
-    selector.innerHTML = options;
+    return {student:null, unmatchedEmail:null, unmatchedName:null};
 }
-LoadDataLocal();
+
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}

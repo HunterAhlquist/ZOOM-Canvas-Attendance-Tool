@@ -37,7 +37,6 @@ const handleDrop = async (e) => {
         return;
     }
     const fileData = await fileArray[0].text(); //since .text() returns a promise, we must await for it to be fulfilled.
-    console.log(fileData.type);
     parseFile(fileData); //turn into students
 }
 //TODO
@@ -53,7 +52,7 @@ const handleUpload = async (evt) => {
 }
 
 const openZoomLink = async () => {
-    window.open("https://us02web.zoom.us/account/", '_blank') //opens to zoom report page
+    window.open("https://zoom.us/account/report/user", '_blank') //opens to zoom report page
 }
 
 /**
@@ -102,3 +101,4 @@ function generateAttendanceSheet(students) {
     let win = window.open("", "Student Attendance", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=900,height=" + (screen.height - 220));
     win.document.body.innerHTML = html;
 }
+
