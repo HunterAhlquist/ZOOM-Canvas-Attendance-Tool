@@ -55,7 +55,7 @@ function processLine(curLine) {
     if (curLine[5] !== "No") { //skip if host
         let matchResult = FindMatchFromStudentAttendance(curLine);
         if (matchResult.student !== null) {
-            if (matchResult.unmatchedEmail !== null && matchResult.unmatchedName.length > 0) {//new email found with name
+            if (matchResult.unmatchedEmail !== null && matchResult.unmatchedEmail.length > 0) {//new email found with name
                 console.log("Adding new email");
                 students[students.indexOf(matchResult.student)].addKnownEmail(curLine[1]);
             }
@@ -63,9 +63,9 @@ function processLine(curLine) {
                 console.log("Unsupported");
             }
             let connectionMatch = null;
-            for (let sc in studentsConnections) {
-                if (sc.checkMatch(curLine[0], curLine[1])) {
-                    connectionMatch = sc;
+            for (let i=0; i<studentsConnections.length; i++) {
+                if (studentsConnections[i].checkMatch(curLine[0], curLine[1])) {
+                    connectionMatch = studentsConnections[i];
                 }
             }
             if (connectionMatch == null) {

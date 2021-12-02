@@ -102,3 +102,4 @@ function generateAttendanceSheet(students) {
     win.document.body.innerHTML = html;
 }
 
+LoadDataLocal(false);

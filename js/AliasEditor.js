@@ -69,4 +69,4 @@ function PopulateClasses(selector) {
     }
     selector.innerHTML = options;
 }
-LoadDataLocal();
+LoadDataLocal(true);
