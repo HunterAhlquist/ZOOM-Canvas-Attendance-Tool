@@ -12,14 +12,14 @@
 </div>
 
 <div class="button-wrap">
-    <h3>Please choose a certain date for your file</h3>
+    <h3>Select what day(s) the meeting(s) you are trying to find took place</h3>
     <div class="dateError" id="dateError"></div>
     <label for="fromDate">From:</label>
     <input type="date" id="fromDate" required pattern="\d{4}-\d{2}-\d{2}">
     <br>
     <label for="toDate">To:</label>
     <input type="date" id="toDate" required pattern="\d{4}-\d{2}-\d{2}">
-    <label id="zoomLink" class="upload_bottom" style="font-size: 1.25rem !important;">Submit date to Zoom</label>
+    <label id="zoomLink" class="upload_bottom" style="font-size: 1.25rem !important;">Search ZOOM Reports</label>
 </div>
 
 <div class="drop-area">
@@ -32,19 +32,18 @@
 </div>
 
 <div class="button-wrap">
-    <label id="openZoomAcc" class="upload_bottom">Go to ZOOM</label>
-</div>
-
-<div class="button-wrap">
     <label id="openSettings" class="upload_bottom">Settings</label>
 </div>
 
 <div>
     <h2>Help</h2>
-    <p style="margin: 1em; text-align: center;">Under the participants column of this page, click the number of
-        participants corresponding to the date and
-        time of which you want to get a report for. Leave all checkboxes unchecked.</p>
-    <br>
+    <ol style="margin: 1em;">
+        <li>Date selectors to pick a day(s) and click the search button to find
+            attendance reports.</li>
+        <li>Download the .CSV file without altering any other settings.</li>
+        <li>Then simply drag the newly
+            downloaded file to the upload box to view the attendance sheet of that meeting.</li>
+    </ol>
 </div>
 <!-- Note: This is meant to display errors about file uploads -->
 <div class="bottom" id="bottom">

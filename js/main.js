@@ -63,8 +63,9 @@ function openZoomLink() {
  * @param students StudentConnections object array
  */
 function generateAttendanceSheet(students) {
+    let timeStamp = 'For the meeting/class hosted on ' + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + recordDate.split(" ")[2]
     let html = "<head>" +
-        "<title>Student Attendance</title>" +
+        "<title>Student Attendance - " + timeStamp + "</title>" +
         "<style> " +
         "body {font-family: 'Arial', sans-serif;}" +
         "center{display: flex; align-items: center; align-content: center;}" +
@@ -81,10 +82,7 @@ function generateAttendanceSheet(students) {
         ".button_designs:hover {box-shadow: -0.438rem -0.438rem 1.25rem 0 #fff9, -0.25rem -0.25rem 0.313rem 0 #fff9, 0.438rem 0.438rem 1.25rem 0 #0002, 0.25rem 0.25rem 0.313rem 0 #0001;}" +
         "</style>" +
         "</head>";
-    html += "<h2 style='text-align: center; padding-top: 0.3125rem'> For the meeting/class hosted on " + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + "</h2>";
-    html += "<div class='button button_designs'>" +
-        "<a href='#'>Setting placeholder</a>" +
-        "</div>";
+    html += "<h2 style='text-align: center; padding-top: 0.3125rem'> " + timeStamp + "</h2>";
     // Creates new student table
     html += "<ul>" +
         "<li class=\"table_header\">" +
