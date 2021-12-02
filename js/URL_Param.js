@@ -65,7 +65,7 @@ let yesterdaysDate = new Date(todaysDate);
 yesterdaysDate.setDate(yesterdaysDate.getDate() - 1)
 
 // sets the date
-fromField.value = todaysDate.getFullYear().toString() + '-' + todaysDate.getMonth().toString().padStart(2, 0)
+fromField.value = todaysDate.getFullYear().toString() + '-' + (todaysDate.getMonth() + 1).toString().padStart(2, 0)
     + '-' + yesterdaysDate.getDate().toString().padStart(2, 0);
 
 
