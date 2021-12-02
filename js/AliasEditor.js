@@ -32,7 +32,12 @@ studentEditSelector.addEventListener('change', function () { //change student to
 
 //click events
 studentSaveButton.addEventListener('click', function () {
-    let emails = tagify_Email.value;
+    let emails = [];
+    for (let e of tagify_Email.value) {
+        console.log(e.value);
+        emails.push(e.value);
+    }
+
     if (studentSaveButton.value === "add") { //add new
         if (studentIDField.value !== "" && studentNameField.value !== "") {
             let newStudent = new Student(studentIDField.value, studentNameField.value, emails);

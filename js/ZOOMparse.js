@@ -58,7 +58,6 @@ function processLine(curLine) {
         let matchResult = FindMatchFromStudentAttendance(curLine);
         if (matchResult.student !== null) {
             if (matchResult.unmatchedEmail !== null && matchResult.unmatchedEmail.length > 0) {//new email found with name
-                console.log("Adding new email");
                 students[students.indexOf(matchResult.student)].addKnownEmail(curLine[1]);
             }
             if (matchResult.unmatchedName !== null) {//new name found with email (might be a ZOOM username)
@@ -74,6 +73,11 @@ function processLine(curLine) {
                 connectionMatch = new StudentConnection();
                 connectionMatch.name = curLine[0];
                 connectionMatch.email = curLine[1];
+                if (matchResult.student.emails.length > 0) {
+                    console.log(matchResult.student.emails[0]);
+                    connectionMatch.email = matchResult.student.emails[0];
+                }
+
                 connectionMatch.addTime(curLine[4]);
                 studentsConnections.push(connectionMatch);
 

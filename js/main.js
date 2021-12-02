@@ -19,7 +19,6 @@ const initApp = () => {
 
     droparea.addEventListener("drop", handleDrop);
     document.querySelector('#zoomLink').addEventListener("click", pushData);
-    document.querySelector('#openZoomAcc').addEventListener("click", openZoomLink);
     document.querySelector('#upload').addEventListener("input", handleUpload);
 }
 
@@ -63,7 +62,7 @@ function openZoomLink() {
  * @param students StudentConnections object array
  */
 function generateAttendanceSheet(students) {
-    let timeStamp = 'For the meeting/class hosted on ' + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1] + recordDate.split(" ")[2]
+    let timeStamp = 'For the meeting/class hosted on ' + recordDate.split(" ")[0] + " starting at " + recordDate.split(" ")[1];
     let html = "<head>" +
         "<title>Student Attendance - " + timeStamp + "</title>" +
         "<style> " +
