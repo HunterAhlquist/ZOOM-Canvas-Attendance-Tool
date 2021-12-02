@@ -5,9 +5,11 @@ let curStudent;
 let curClass;
 
 function DEBUG_WipeChromeData() {
-    chrome.storage.local.clear(function () {
-        console.log("deleted all")
-    });
+    if (confirm("Wipe extension data? This will forget all students saved.")) {
+        chrome.storage.local.clear(function () {
+            console.log("deleted all")
+        });
+    }
 }
 
 function SaveDataLocal() {

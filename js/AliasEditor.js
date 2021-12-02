@@ -53,6 +53,7 @@ studentSaveButton.addEventListener('click', function () {
 
 });
 
+document.getElementById("forgetAll").addEventListener('click', DEBUG_WipeChromeData);
 
 //general functions
 function PopulateStudents(selector) {
