@@ -8,6 +8,7 @@
 * 5 -> Was a guest (No = meeting host/instructor, Yes = guest/student
 * 6 -> Recording consent (Y = Yes/true, (blank) = No/false)
 * */
+let properCSVFormatWithConsent = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest", "Recording Consent"];
 let properCSVFormat = ["Name (Original Name)", "User Email", "Join Time", "Leave Time", "Duration (Minutes)", "Guest"];
 let studentsConnections = []; //this is the finished variable that contains StudentConnections.
 let unknownStudents = []; //if no match for a student is found
@@ -16,7 +17,8 @@ function parseFile(fileData) {
     //Create Array from file
     let rawLines = fileData.split('\r\n');
     let colDef = rawLines[0].split(",");
-    if (JSON.stringify(properCSVFormat) !== JSON.stringify(colDef)) {
+    if (JSON.stringify(properCSVFormat) !== JSON.stringify(colDef)
+        && JSON.stringify(properCSVFormatWithConsent) !== JSON.stringify(colDef)) {
         if (confirm("WARNING: File does not match proper format, continuing may add unrelated data to the students list!")){
             //do nothing
             console.log("Don't say I didn't warn you...")

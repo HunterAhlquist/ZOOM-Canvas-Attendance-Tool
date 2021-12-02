@@ -50,6 +50,7 @@ body {
 }
 
 h3 {
+    margin-top: 0;
     text-align: center;
 }
 
@@ -93,6 +94,24 @@ input[type="file"] {
 
 body div h2 {
     text-align: center;
+}
+
+div:nth-of-type(2) {
+
+    text-align: center;
+}
+
+div:nth-of-type(2) label {
+    font-size: 1.17em;
+}
+
+div:nth-of-type(2) input {
+    margin-bottom: 1rem;
+}
+
+div h2 {
+    padding-bottom: 3px;
+    border-bottom: 2px solid darkgray;
 }
 
 /*
