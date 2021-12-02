@@ -4,6 +4,12 @@ let classes = [];
 let curStudent;
 let curClass;
 
+function DEBUG_WipeChromeData() {
+    chrome.storage.local.clear(function () {
+        console.log("deleted all")
+    });
+}
+
 function SaveDataLocal() {
     chrome.storage.local.clear(function () {
         console.log("deleted all")
